@@ -1,20 +1,20 @@
 import { St } from './state';
-import { VoidPayloadMev, AC } from 'types/store';
+import { VoidPayload, AC } from 'types/store';
 import { COUNTER_T } from 'configs/c2Mods';
 
 type IAC = AC<COUNTER_T>;
 
 const delay = (ms = 1000) => new Promise(r => setTimeout(r, ms));
 
-export function incrementBigValue(payload: VoidPayloadMev, moduleState: St): Partial<St> {
+export function incrementBigValue(payload: VoidPayload, moduleState: St): Partial<St> {
   return { bigValue: moduleState.bigValue + 50 };
 }
 
-export function increment(payload: VoidPayloadMev, moduleState: St): Partial<St> {
+export function increment(payload: VoidPayload, moduleState: St): Partial<St> {
   return { value: moduleState.value + 1 };
 }
 
-export function decrement(payload: VoidPayloadMev, moduleState: St): Partial<St> {
+export function decrement(payload: VoidPayload, moduleState: St): Partial<St> {
   return { value: moduleState.value - 1 };
 }
 
