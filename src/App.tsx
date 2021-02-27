@@ -9,10 +9,9 @@ import { useSetup } from 'services/concent';
 import { CtxDe } from 'types/store';
 
 function setup(ctx: CtxDe) {
-  const state = ctx.initState({
+  const ins = ctx.initState({
     selectedKey: '1',
   });
-  type St = typeof state;
 
   ctx.effect(() => {
     console.log('didMount');
@@ -27,14 +26,14 @@ function setup(ctx: CtxDe) {
   });
 
   // define ref computed
-  const rcu = ctx.computed({
-    content(n: St) {
+  const rcu = ins.computed({
+    content(n) {
       const { selectedKey } = n;
       if (selectedKey === '1') return <Counter />
       else if (selectedKey === '2') return <Counter2 />
       else return `unknown selectedKey ${selectedKey}`
     },
-    tip(n: St) {
+    tip(n) {
       const { selectedKey } = n;
       if (selectedKey === '1') return <h1>hey you are choosing 1</h1>
       else return <h2>Counter2 model is a better code organization</h2>
@@ -44,7 +43,7 @@ function setup(ctx: CtxDe) {
   // export as settings
   return {
     rcu,
-    state,
+    state: ins.state,
     handleClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       ctx.setState({ selectedKey: e.currentTarget.dataset.skey });
     }
